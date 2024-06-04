@@ -1,0 +1,1630 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="45">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>174</ID>
+      <Description>"Enable Achievement Unlocker"</Description>
+      <Options moHideChildren="1"/>
+      <Color>008000</Color>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Before We Leave.exe
+  Version: 1.0.11.0
+  Date   : 2024-03-05
+  Author : SvT
+}
+
+[ENABLE]
+LuaCall(function cycleFullCompact(sender,force) local state = not(compactmenuitem.Caption == 'Compact View Mode'); if force~=nil then state = not force end; compactmenuitem.Caption = state and 'Compact View Mode' or 'Full View Mode'; getMainForm().Splitter1.Visible = state; getMainForm().Panel4.Visible    = state; getMainForm().Panel5.Visible    = state; end; function addCompactMenu() if compactmenualreadyexists then return end; local parent = getMainForm().Menu.Items; compactmenuitem = createMenuItem(parent); parent.add(compactmenuitem); compactmenuitem.Caption = 'Compact View Mode'; compactmenuitem.OnClick = cycleFullCompact; compactmenualreadyexists = 'yes'; end; addCompactMenu(); cycleFullCompact(nil,true))
+{$lua}
+LaunchMonoDataCollector()
+{$asm}
+
+/////
+UnifyAchievementManager:CheckAchievement+306:
+db 90 90
+/////
+
+alloc(newmem,2048,UnifyAchievementManager:CheckAchievement+315)
+label(returnhere)
+label(originalcode)
+label(exit)
+label(achBase)
+registersymbol(achBase)
+
+newmem:
+mov [achBase],rdx
+
+originalcode:
+mov rax,[r15]
+call qword ptr [rax+00000088]
+
+exit:
+jmp returnhere
+
+achBase:
+dd 0
+
+UnifyAchievementManager:CheckAchievement+315:
+jmp newmem
+nop 4
+returnhere:
+
+[DISABLE]
+LuaCall(cycleFullCompact(nil,false))
+
+/////
+UnifyAchievementManager:CheckAchievement+306:
+jne "UnifyAchievementManager:CheckAchievement"+31e
+/////
+
+unregistersymbol(achBase)
+dealloc(newmem)
+UnifyAchievementManager:CheckAchievement+315:
+mov rax,[r15]
+call qword ptr [rax+00000088]
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>67</ID>
+          <Description>"Increase Game Speed"</Description>
+          <Color>808000</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+LuaCall(speedhack_setSpeed(6.0))
+
+[DISABLE]
+LuaCall(speedhack_setSpeed(1.0))
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>176</ID>
+          <Description>"[achBase]"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <Color>0000FA</Color>
+          <VariableType>Array of byte</VariableType>
+          <ByteLength>0</ByteLength>
+          <Address>[achBase]</Address>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>180</ID>
+              <Description>"String Length"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+10</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>179</ID>
+              <Description>"Achievement String"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>String</VariableType>
+              <Length>128</Length>
+              <Unicode>1</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>+14</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>188</ID>
+          <Description>"Achievements"</Description>
+          <Color>008000</Color>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>257</ID>
+              <Description>"7 Horizons"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'EXPANSIONIST' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>288</ID>
+              <Description>"A New Home"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'COLONISE_PLANET' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>247</ID>
+              <Description>"A Whole New World"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'FINISH_GAME' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>191</ID>
+              <Description>"Admiral"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'ADMIRAL' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>241</ID>
+              <Description>"Alchemist"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'ALCHEMIST' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>272</ID>
+              <Description>"Apocalype Soon"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'APOCALYPSE_SOON_SCENARIO' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>194</ID>
+              <Description>"Astronaut"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'ASTRONAUT' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>276</ID>
+              <Description>"Baby Boom"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'BABY_BOOM' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>277</ID>
+              <Description>"Baby Boom Plus"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'BABY_BOOM_PLUS' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>248</ID>
+              <Description>"Back to the Bunker"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'ALL_PEEPS_IN_SHELTER' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>285</ID>
+              <Description>"Blacksmith"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'TOOLSMITH' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>193</ID>
+              <Description>"Captain"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'CAPTAIN' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>251</ID>
+              <Description>"Debug Mode"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'TAME_GREMLIN' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>267</ID>
+              <Description>"Environmental Protection Agency"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'ENVIRONMENTAL_PROTECTION_AGENCY' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>237</ID>
+              <Description>"Explorer"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'EXPLORER' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>238</ID>
+              <Description>"Explorer Plus"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'EXPLORER_PLUS' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>246</ID>
+              <Description>"Feed The Beast"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'WHALE_SPACEELEVATOR' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>249</ID>
+              <Description>"Fortified"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'FULL_SHIELD' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>275</ID>
+              <Description>"Getting Busy"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'BIRDS_AND_BEES_SCENARIO' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>190</ID>
+              <Description>"Giant Woodchuck"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'GIANT_WOODCHUCK' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>242</ID>
+              <Description>"Grand Alchemist"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'GRAND_ALCHEMIST' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>195</ID>
+              <Description>"Grand Tinker"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'GRAND_TINKER' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>250</ID>
+              <Description>"Heart of the Labyrinth"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'TAME_MINOTAUR' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>253</ID>
+              <Description>"Heart of the Ocean"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'TAME_KRAKEN' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>261</ID>
+              <Description>"Holiday Resort"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'HOLIDAY_RESORT' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>274</ID>
+              <Description>"Hut-Owners Association"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'PLANNING_COMMITTEE_SCENARIO' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>289</ID>
+              <Description>"It's Bright Out There"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'COLONISE_INNERMOST' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>255</ID>
+              <Description>"Let's Get Off This Rock"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'REPAIR_SPACESHIP_TIMED' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>259</ID>
+              <Description>"Metropolis"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'METROPOLIS' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>270</ID>
+              <Description>"Misery Loves Company"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = '100_SAD_PEEPS' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>268</ID>
+              <Description>"Nom Nom Nom"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'NOM_NOM_NOM' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>262</ID>
+              <Description>"One with Nature"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'ONE_WITH_NATURE' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>256</ID>
+              <Description>"Opulence"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'OPULENCE' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>278</ID>
+              <Description>"Property Investor"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'PROPERTY_INVESTOR' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>236</ID>
+              <Description>"Property Tycoon"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'PROPERTY_TYCOON' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>264</ID>
+              <Description>"Radioactive"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'RADIOACTIVE' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>252</ID>
+              <Description>"Riddle Master"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'TAME_SPHINX' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>286</ID>
+              <Description>"Seaworthy"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'REPAIR_SHIP' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>273</ID>
+              <Description>"Seed Hunter"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'PLANTS_SCENARIO' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>254</ID>
+              <Description>"Smooth Sailing"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'REPAIR_SHIP_TIMED' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>192</ID>
+              <Description>"Space Admiral"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'SPACE_ADMIRAL' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>239</ID>
+              <Description>"Survivalist"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'SURVIVALIST' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>240</ID>
+              <Description>"Survivalist Plus"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'SURVIVALIST_PLUS' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>244</ID>
+              <Description>"The Dark Reaches"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'COLONISE_OUTERMOST' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>287</ID>
+              <Description>"The Stars Beckon"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'REPAIR_SPACESHIP' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>266</ID>
+              <Description>"The Taste Of Home"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'TASTE_OF_HOME' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>243</ID>
+              <Description>"Tinker"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'TINKER' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>260</ID>
+              <Description>"Utopia"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'PARADISE' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>265</ID>
+              <Description>"Variety is the Spice of Life"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'POPULATE_ALL_BIOMES' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>258</ID>
+              <Description>"Warm at Heart"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'WARM_AT_HEART' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>263</ID>
+              <Description>"We Don't Need No Education"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'NO_EDUCATION' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>271</ID>
+              <Description>"What did I step in?"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'ALL_TILES_POLLUTED' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>245</ID>
+              <Description>"What was That?"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'WHALE_SURVIVE' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>269</ID>
+              <Description>"Who put that there?"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'DESTROY_SHIP_CRYSTAL' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>189</ID>
+              <Description>"Woodchuck"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+strLenAddr = getAddress('[achBase]+10')
+achString = 'WOODCHUCK' -- achievement name string
+strLength = string.len(achString)
+
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+
+{$asm}
+[DISABLE]
+{$lua}
+if (syntaxcheck) then return end
+achString = 'PLACEHOLDER' -- achievement name string
+strLength = string.len(achString)
+writeInteger(strLenAddr, strLength)
+writeString(strLenAddr + 0x4, achString, true)
+writeBytes(strLenAddr + 0x4 + #achString*2, 0, 0)
+</AssemblerScript>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <CheatCodes>
+    <CodeEntry>
+      <Description>Change of jne UnifyAchievementManager:CheckAchievement+1ee</Description>
+      <AddressString>182A79B5E96</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>83</Byte>
+        <Byte>FE</Byte>
+        <Byte>64</Byte>
+      </Before>
+      <Actual>
+        <Byte>75</Byte>
+        <Byte>16</Byte>
+      </Actual>
+      <After>
+        <Byte>49</Byte>
+        <Byte>8B</Byte>
+        <Byte>CF</Byte>
+        <Byte>48</Byte>
+        <Byte>BA</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov rdx,00000181D5B77B80</Description>
+      <AddressString>182A79B5E39</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>49</Byte>
+        <Byte>8B</Byte>
+        <Byte>CF</Byte>
+      </Before>
+      <Actual>
+        <Byte>48</Byte>
+        <Byte>BA</Byte>
+        <Byte>80</Byte>
+        <Byte>7B</Byte>
+        <Byte>B7</Byte>
+        <Byte>D5</Byte>
+        <Byte>81</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>49</Byte>
+        <Byte>8B</Byte>
+        <Byte>07</Byte>
+        <Byte>FF</Byte>
+        <Byte>90</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of jne UnifyAchievementManager:CheckAchievement+290</Description>
+      <AddressString>182A79B5E30</AddressString>
+      <Before>
+        <Byte>FE</Byte>
+        <Byte>E8</Byte>
+        <Byte>03</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>85</Byte>
+        <Byte>1A</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>49</Byte>
+        <Byte>8B</Byte>
+        <Byte>CF</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
+  <UserdefinedSymbols/>
+</CheatTable>

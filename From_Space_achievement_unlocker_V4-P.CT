@@ -1,0 +1,542 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="45">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description>"Enable Achievement Unlocker"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <Color>008000</Color>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : FromSpace.exe
+  Version: 1.2.83.0 | Windows Store
+  Date   : 2023-11-09
+  Author : SvT
+}
+
+[ENABLE]
+LuaCall(function cycleFullCompact(sender,force) local state = not(compactmenuitem.Caption == 'Compact View Mode'); if force~=nil then state = not force end; compactmenuitem.Caption = state and 'Compact View Mode' or 'Full View Mode'; getMainForm().Splitter1.Visible = state; getMainForm().Panel4.Visible    = state; getMainForm().Panel5.Visible    = state; end; function addCompactMenu() if compactmenualreadyexists then return end; local parent = getMainForm().Menu.Items; compactmenuitem = createMenuItem(parent); parent.add(compactmenuitem); compactmenuitem.Caption = 'Compact View Mode'; compactmenuitem.OnClick = cycleFullCompact; compactmenualreadyexists = 'yes'; end; addCompactMenu(); cycleFullCompact(nil,true))
+
+{$lua}
+LaunchMonoDataCollector()
+{$asm}
+
+[DISABLE]
+LuaCall(cycleFullCompact(nil,false))
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>127</ID>
+          <Description>"Achievements"</Description>
+          <Color>008000</Color>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>177</ID>
+              <Description>"101"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','AchievementManager', 'CompleteAchievement'), 0x0, {{type = vtDword, value = 20}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>157</ID>
+              <Description>"Bad luck"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','AchievementManager', 'CompleteAchievement'), 0x0, {{type = vtDword, value = 3}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>186</ID>
+              <Description>"Blast pit"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','AchievementManager', 'CompleteAchievement'), 0x0, {{type = vtDword, value = 14}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>193</ID>
+              <Description>"Boring"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','AchievementManager', 'CompleteAchievement'), 0x0, {{type = vtDword, value = 7}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>207</ID>
+              <Description>"Break an egg"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','AchievementManager', 'CompleteAchievement'), 0x0, {{type = vtDword, value = 40}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>178</ID>
+              <Description>"Bring it on"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','AchievementManager', 'CompleteAchievement'), 0x0, {{type = vtDword, value = 19}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>188</ID>
+              <Description>"City life"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','AchievementManager', 'CompleteAchievement'), 0x0, {{type = vtDword, value = 12}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>176</ID>
+              <Description>"Denarian"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','AchievementManager', 'CompleteAchievement'), 0x0, {{type = vtDword, value = 21}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>181</ID>
+              <Description>"Double trouble"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','AchievementManager', 'CompleteAchievement'), 0x0, {{type = vtDword, value = 16}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>191</ID>
+              <Description>"Exotic"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','AchievementManager', 'CompleteAchievement'), 0x0, {{type = vtDword, value = 9}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>195</ID>
+              <Description>"Fable"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','AchievementManager', 'CompleteAchievement'), 0x0, {{type = vtDword, value = 5}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>179</ID>
+              <Description>"Family"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','AchievementManager', 'CompleteAchievement'), 0x0, {{type = vtDword, value = 18}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>185</ID>
+              <Description>"Fauna"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','AchievementManager', 'CompleteAchievement'), 0x0, {{type = vtDword, value = 15}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>180</ID>
+              <Description>"For science!"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','AchievementManager', 'CompleteAchievement'), 0x0, {{type = vtDword, value = 17}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>160</ID>
+              <Description>"Level up"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','AchievementManager', 'CompleteAchievement'), 0x0, {{type = vtDword, value = 37}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>156</ID>
+              <Description>"Move out"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','AchievementManager', 'CompleteAchievement'), 0x0, {{type = vtDword, value = 2}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>159</ID>
+              <Description>"New fighter"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','AchievementManager', 'CompleteAchievement'), 0x0, {{type = vtDword, value = 38}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>140</ID>
+              <Description>"Overpowered"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','AchievementManager', 'CompleteAchievement'), 0x0, {{type = vtDword, value = 1}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>189</ID>
+              <Description>"Park free"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','AchievementManager', 'CompleteAchievement'), 0x0, {{type = vtDword, value = 11}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>190</ID>
+              <Description>"Power to the people"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','AchievementManager', 'CompleteAchievement'), 0x0, {{type = vtDword, value = 10}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>164</ID>
+              <Description>"Resist and fight"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','AchievementManager', 'CompleteAchievement'), 0x0, {{type = vtDword, value = 33}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>163</ID>
+              <Description>"Resistance specialist"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','AchievementManager', 'CompleteAchievement'), 0x0, {{type = vtDword, value = 34}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>187</ID>
+              <Description>"Service resumed"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','AchievementManager', 'CompleteAchievement'), 0x0, {{type = vtDword, value = 13}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>194</ID>
+              <Description>"Silky"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','AchievementManager', 'CompleteAchievement'), 0x0, {{type = vtDword, value = 6}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>158</ID>
+              <Description>"Struck"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','AchievementManager', 'CompleteAchievement'), 0x0, {{type = vtDword, value = 4}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>206</ID>
+              <Description>"Subjective"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','AchievementManager', 'CompleteAchievement'), 0x0, {{type = vtDword, value = 41}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>174</ID>
+              <Description>"Tricenarian"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','AchievementManager', 'CompleteAchievement'), 0x0, {{type = vtDword, value = 23}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>161</ID>
+              <Description>"True leadership"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','AchievementManager', 'CompleteAchievement'), 0x0, {{type = vtDword, value = 36}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>208</ID>
+              <Description>"Underground warehouse"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','AchievementManager', 'CompleteAchievement'), 0x0, {{type = vtDword, value = 39}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>162</ID>
+              <Description>"Up the ladder"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','AchievementManager', 'CompleteAchievement'), 0x0, {{type = vtDword, value = 35}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>175</ID>
+              <Description>"Vicenarian"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','AchievementManager', 'CompleteAchievement'), 0x0, {{type = vtDword, value = 22}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>192</ID>
+              <Description>"Wax"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','AchievementManager', 'CompleteAchievement'), 0x0, {{type = vtDword, value = 8}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>210</ID>
+          <Description>"DLC Achievements"</Description>
+          <Color>808000</Color>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>209</ID>
+              <Description>"Forecast revised"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','AchievementManager', 'CompleteAchievement'), 0x0, {{type = vtDword, value = 24}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>218</ID>
+              <Description>"Treasure hunt"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','AchievementManager', 'CompleteAchievement'), 0x0, {{type = vtDword, value = 25}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>217</ID>
+              <Description>"Plot holes"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','AchievementManager', 'CompleteAchievement'), 0x0, {{type = vtDword, value = 26}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>216</ID>
+              <Description>"Mammoth trail"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','AchievementManager', 'CompleteAchievement'), 0x0, {{type = vtDword, value = 27}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>215</ID>
+              <Description>"The great pier"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','AchievementManager', 'CompleteAchievement'), 0x0, {{type = vtDword, value = 28}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>214</ID>
+              <Description>"Beginner"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','AchievementManager', 'CompleteAchievement'), 0x0, {{type = vtDword, value = 29}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>213</ID>
+              <Description>"Novice"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','AchievementManager', 'CompleteAchievement'), 0x0, {{type = vtDword, value = 30}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>212</ID>
+              <Description>"Expert"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','AchievementManager', 'CompleteAchievement'), 0x0, {{type = vtDword, value = 31}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>211</ID>
+              <Description>"Legend"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','AchievementManager', 'CompleteAchievement'), 0x0, {{type = vtDword, value = 32}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+  <Comments>Notes:
+Base list missing #24-#32
+</Comments>
+</CheatTable>

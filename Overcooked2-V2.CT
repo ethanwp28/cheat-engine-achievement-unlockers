@@ -1,0 +1,1150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="45">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description>"Enable Achievement Unlocker"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <Color>008000</Color>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Overcooked2.exe
+  Version: 1.0.244.0 | Windows Store
+  Date   : 2022-12-26
+  Author : SvT
+}
+
+[ENABLE]
+LuaCall(function cycleFullCompact(sender,force) local state = not(compactmenuitem.Caption == 'Compact View Mode'); if force~=nil then state = not force end; compactmenuitem.Caption = state and 'Compact View Mode' or 'Full View Mode'; getMainForm().Splitter1.Visible = state; getMainForm().Panel4.Visible    = state; getMainForm().Panel5.Visible    = state; end; function addCompactMenu() if compactmenualreadyexists then return end; local parent = getMainForm().Menu.Items; compactmenuitem = createMenuItem(parent); parent.add(compactmenuitem); compactmenuitem.Caption = 'Compact View Mode'; compactmenuitem.OnClick = cycleFullCompact; compactmenualreadyexists = 'yes'; end; addCompactMenu(); cycleFullCompact(nil,true))
+
+{$lua}
+LaunchMonoDataCollector()
+
+  if (syntaxcheck) then return end
+  local cls = GetLuaEngine()
+           cls.mOutput.Lines.Clear()
+
+     local domain = mono_enumDomains()[1]
+     local klass = mono_findClass('', 'OvercookedAchievementManager')
+     local instance = mono_class_findInstancesOfClassListOnly(domain,klass)
+
+        for k,v in pairs(instance) do
+
+        local BaseAddress = getAddressSafe(v)
+
+        local m_initialised_offset = 0x38
+        local m_initialised_address = getAddress(BaseAddress + m_initialised_offset)
+        local m_initialised_value = readInteger(m_initialised_address)
+
+        local addressList = getAddressList()
+        local debugBox = addressList.getMemoryRecordByDescription('DEBUG (enable this first)')
+
+        if (m_initialised_value == 1) then
+           registerSymbol("instanceAddress",instance[k])
+           if debugBox.Active == true then
+              output1 = '[ %s ] --&gt; Instance ( %X ) --&gt; m_initialised_address [ %X ] --&gt; m_initialised_value hex: ( %08X ) &lt;-- int: ( %s )'
+              print((output1):format(k,instance[k],m_initialised_address,m_initialised_value or 0,m_initialised_value))
+              print("TRUE : conditions met \n")
+           end
+        else
+            if debugBox.Active == true then
+              print("FALSE : conditions not met \n")
+            end
+        end
+     end
+
+{$asm}
+
+[DISABLE]
+LuaCall(cycleFullCompact(nil,false))
+
+unregistersymbol(instanceAddress)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>126</ID>
+          <Description>"instanceAddress"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <Color>0000FA</Color>
+          <VariableType>Array of byte</VariableType>
+          <ByteLength>0</ByteLength>
+          <Address>instanceAddress</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>127</ID>
+          <Description>"Achievements"</Description>
+          <Color>008000</Color>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>160</ID>
+              <Description>"A Grand Dining Experience"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 3}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>172</ID>
+              <Description>"And Suet Begins"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 16}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>167</ID>
+              <Description>"Bangers And Trash"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 21}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>178</ID>
+              <Description>"Battered!"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 10}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>175</ID>
+              <Description>"Chef de Partie"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 13}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>161</ID>
+              <Description>"Clockwork Kitchen"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 8}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>176</ID>
+              <Description>"Commis Chef"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 12}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>171</ID>
+              <Description>"Dinner Party Posse"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 17}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>166</ID>
+              <Description>"Dishwasher"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 22}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>157</ID>
+              <Description>"Executive Chef"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 6}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>163</ID>
+              <Description>"Get To The Chopper"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 25}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>158</ID>
+              <Description>"Head Chef"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 5}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>179</ID>
+              <Description>"Hot Pot Shot"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 9}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>168</ID>
+              <Description>"I Ain't No Butterfingers"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 20}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>173</ID>
+              <Description>"If You Can't Stand the Heat"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 15}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>170</ID>
+              <Description>"It's A Cook-Off!"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 18}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>165</ID>
+              <Description>"It's Bean Emotional"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 23}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>164</ID>
+              <Description>"Jelly-Porter"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 24}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>177</ID>
+              <Description>"Kitchen Porter"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 11}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>159</ID>
+              <Description>"Sous Chef"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 4}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>162</ID>
+              <Description>"Switch It Up"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 26}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>156</ID>
+              <Description>"The Secret Ingredient"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 2}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>140</ID>
+              <Description>"The Spice of Life"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 7}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>155</ID>
+              <Description>"The Unbread"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 1}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>174</ID>
+              <Description>"Too Many Cooks"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 14}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>169</ID>
+              <Description>"Toss Lightly"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 19}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>180</ID>
+              <Description>"Surf n Turf"</Description>
+              <Color>808000</Color>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>184</ID>
+                  <Description>"Surf 'n' Turf"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 27}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>194</ID>
+                  <Description>"You Got Served"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 28}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>193</ID>
+                  <Description>"Smoothie Criminal"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 29}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>192</ID>
+                  <Description>"Skewer Rat"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 30}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>191</ID>
+                  <Description>"Carte Blanched"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 31}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>190</ID>
+                  <Description>"Soaker Cola"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 32}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>189</ID>
+                  <Description>"Heat and Greet"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 33}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>183</ID>
+              <Description>"Campfire Cook Off"</Description>
+              <Color>808000</Color>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>185</ID>
+                  <Description>"Cooked Off!"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 34}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>199</ID>
+                  <Description>"Full Mashings"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 35}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>198</ID>
+                  <Description>"S'more Than a Feeling"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 36}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>197</ID>
+                  <Description>"The Greasy Spoon"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 37}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>196</ID>
+                  <Description>"Specials Board"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 38}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>195</ID>
+                  <Description>"Tree Hater"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 39}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>188</ID>
+                  <Description>"Backpack Hijack"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 40}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>181</ID>
+              <Description>"Night of the Hangry Horde"</Description>
+              <Color>808000</Color>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>187</ID>
+                  <Description>"You Shallot Pass!"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 41}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>205</ID>
+                  <Description>"Star Braiser"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 42}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>204</ID>
+                  <Description>"Get Roasted"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 43}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>203</ID>
+                  <Description>"Pie Me a River"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 44}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>202</ID>
+                  <Description>"Wrap Artist"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 45}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>201</ID>
+                  <Description>"Coal of Duty"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 46}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>200</ID>
+                  <Description>"Heads Will Roll"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 47}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>182</ID>
+              <Description>"Carnival of Chaos"</Description>
+              <Color>808000</Color>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>186</ID>
+                  <Description>"Carnival of Chaos"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 48}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>211</ID>
+                  <Description>"Fast Foodie"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 49}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>210</ID>
+                  <Description>"Mealer Dealer"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 50}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>209</ID>
+                  <Description>"The Breaded Lady"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 51}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>208</ID>
+                  <Description>"Big Topping"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 52}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>207</ID>
+                  <Description>"Cannoned Goods"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 53}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>206</ID>
+                  <Description>"Condiment Connoisseur"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+{$lua}
+if (syntaxcheck) then return end
+mono_invoke_method(nil, mono_findMethod('','OvercookedAchievementManager', 'OnTrophyUnlock'), getAddress('instanceAddress'), {{type = vtDword, value = 54}})
+{$asm}
+[DISABLE]
+</AssemblerScript>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>38</ID>
+      <Description>"DEBUG (enable this first)"</Description>
+      <Options moHideChildren="1"/>
+      <Color>0000FA</Color>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>154</ID>
+          <Description>"instanceAddress"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <Color>0000FA</Color>
+          <VariableType>Array of byte</VariableType>
+          <ByteLength>0</ByteLength>
+          <Address>instanceAddress</Address>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>128</ID>
+              <Description>"m_initialised"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Byte</VariableType>
+              <Address>+38</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <CheatCodes>
+    <CodeEntry>
+      <Description>Change of movss xmm0,[rsi+20]</Description>
+      <AddressString>265822EE425</AddressString>
+      <Before>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>6E</Byte>
+        <Byte>1C</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>46</Byte>
+        <Byte>20</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>5A</Byte>
+        <Byte>C0</Byte>
+        <Byte>F3</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov [rsi+18],edi</Description>
+      <AddressString>265822EE48B</AddressString>
+      <Before>
+        <Byte>84</Byte>
+        <Byte>03</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>7E</Byte>
+        <Byte>18</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8D</Byte>
+        <Byte>65</Byte>
+        <Byte>F0</Byte>
+        <Byte>5F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov r11,TimeManager:GetDeltaTime</Description>
+      <AddressString>265822EE3FE</AddressString>
+      <Before>
+        <Byte>C8</Byte>
+        <Byte>48</Byte>
+        <Byte>83</Byte>
+        <Byte>EC</Byte>
+        <Byte>20</Byte>
+      </Before>
+      <Actual>
+        <Byte>49</Byte>
+        <Byte>BB</Byte>
+        <Byte>40</Byte>
+        <Byte>03</Byte>
+        <Byte>97</Byte>
+        <Byte>D8</Byte>
+        <Byte>65</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>41</Byte>
+        <Byte>FF</Byte>
+        <Byte>D3</Byte>
+        <Byte>48</Byte>
+        <Byte>83</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of push rbp</Description>
+      <AddressString>1741944A860</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>55</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>EC</Byte>
+        <Byte>56</Byte>
+        <Byte>57</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov rax,[rsi+10]</Description>
+      <AddressString>276196AF0CD</AddressString>
+      <Before>
+        <Byte>EC</Byte>
+        <Byte>10</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>F1</Byte>
+      </Before>
+      <Actual>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>46</Byte>
+        <Byte>10</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>C8</Byte>
+        <Byte>48</Byte>
+        <Byte>83</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movss xmm0,[rsi+20]</Description>
+      <AddressString>2D88878D585</AddressString>
+      <Before>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>6E</Byte>
+        <Byte>1C</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>46</Byte>
+        <Byte>20</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>5A</Byte>
+        <Byte>C0</Byte>
+        <Byte>F3</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movss [rsi+1C],xmm5</Description>
+      <AddressString>2D88878D580</AddressString>
+      <Before>
+        <Byte>C1</Byte>
+        <Byte>F2</Byte>
+        <Byte>0F</Byte>
+        <Byte>5A</Byte>
+        <Byte>E8</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>6E</Byte>
+        <Byte>1C</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>46</Byte>
+        <Byte>20</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov r11,SuppressionController:UpdateSuppressors</Description>
+      <AddressString>2D88878D4AB</AddressString>
+      <Before>
+        <Byte>EC</Byte>
+        <Byte>20</Byte>
+        <Byte>83</Byte>
+        <Byte>38</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>49</Byte>
+        <Byte>BB</Byte>
+        <Byte>50</Byte>
+        <Byte>3C</Byte>
+        <Byte>1D</Byte>
+        <Byte>8F</Byte>
+        <Byte>D8</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>41</Byte>
+        <Byte>FF</Byte>
+        <Byte>D3</Byte>
+        <Byte>48</Byte>
+        <Byte>83</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of cmp dword ptr [rax],00</Description>
+      <AddressString>2D88878D4A8</AddressString>
+      <Before>
+        <Byte>C8</Byte>
+        <Byte>48</Byte>
+        <Byte>83</Byte>
+        <Byte>EC</Byte>
+        <Byte>20</Byte>
+      </Before>
+      <Actual>
+        <Byte>83</Byte>
+        <Byte>38</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>49</Byte>
+        <Byte>BB</Byte>
+        <Byte>50</Byte>
+        <Byte>3C</Byte>
+        <Byte>1D</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call r11</Description>
+      <AddressString>2D88878D4B5</AddressString>
+      <Before>
+        <Byte>8F</Byte>
+        <Byte>D8</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>41</Byte>
+        <Byte>FF</Byte>
+        <Byte>D3</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>83</Byte>
+        <Byte>C4</Byte>
+        <Byte>20</Byte>
+        <Byte>48</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov rcx,[rsi+10]</Description>
+      <AddressString>2D88F1D3C5C</AddressString>
+      <Before>
+        <Byte>EC</Byte>
+        <Byte>08</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>F1</Byte>
+      </Before>
+      <Actual>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>4E</Byte>
+        <Byte>10</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>B8</Byte>
+        <Byte>A0</Byte>
+        <Byte>C8</Byte>
+        <Byte>E0</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movss [rsi+24],xmm5</Description>
+      <AddressString>2131AF1D1F0</AddressString>
+      <Before>
+        <Byte>C1</Byte>
+        <Byte>F2</Byte>
+        <Byte>0F</Byte>
+        <Byte>5A</Byte>
+        <Byte>E8</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>6E</Byte>
+        <Byte>24</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>46</Byte>
+        <Byte>28</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movss [rsi+1C],xmm5</Description>
+      <AddressString>2131AF1E510</AddressString>
+      <Before>
+        <Byte>C1</Byte>
+        <Byte>F2</Byte>
+        <Byte>0F</Byte>
+        <Byte>5A</Byte>
+        <Byte>E8</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>6E</Byte>
+        <Byte>1C</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>46</Byte>
+        <Byte>20</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movss [rdi+00000108],xmm0</Description>
+      <AddressString>UnityPlayer.dll+7FDF70</AddressString>
+      <Before>
+        <Byte>87</Byte>
+        <Byte>28</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>87</Byte>
+        <Byte>08</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>B6</Byte>
+        <Byte>45</Byte>
+        <Byte>59</Byte>
+        <Byte>88</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
+  <UserdefinedSymbols>
+    <SymbolEntry>
+      <Name>instanceAddress</Name>
+      <Address>204CEAE41E0</Address>
+    </SymbolEntry>
+  </UserdefinedSymbols>
+</CheatTable>

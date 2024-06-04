@@ -1,0 +1,1600 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="45">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>22</ID>
+      <Description>"Complete tutorial and set up camp first!"</Description>
+      <GroupHeader>1</GroupHeader>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>105</ID>
+      <Description>""</Description>
+      <GroupHeader>1</GroupHeader>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>14</ID>
+      <Description>"Enable Achievement Unlocker"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <Color>008000</Color>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Dungeons.exe
+  Version: 1.17.0.0 | Windows Store
+  Date   : 10-21-23
+  Author : SvT
+}
+
+[ENABLE]
+LuaCall(function cycleFullCompact(sender,force) local state = not(compactmenuitem.Caption == 'Compact View Mode'); if force~=nil then state = not force end; compactmenuitem.Caption = state and 'Compact View Mode' or 'Full View Mode'; getMainForm().Splitter1.Visible = state; getMainForm().Panel4.Visible    = state; getMainForm().Panel5.Visible    = state; end; function addCompactMenu() if compactmenualreadyexists then return end; local parent = getMainForm().Menu.Items; compactmenuitem = createMenuItem(parent); parent.add(compactmenuitem); compactmenuitem.Caption = 'Compact View Mode'; compactmenuitem.OnClick = cycleFullCompact; compactmenualreadyexists = 'yes'; end; addCompactMenu(); cycleFullCompact(nil,true))
+
+alloc(newmem,2048,"Dungeons.exe"+DD1BFE)
+label(returnhere)
+label(originalcode)
+label(exit)
+label(killTracker)
+label(_lessThan50Flag)
+registersymbol(killTracker)
+registersymbol(_lessThan50Flag)
+
+newmem:
+push rbx
+mov rbx,rax
+mov [killTracker],rbx // symbol to debug total mob kills
+pop rbx
+cmp [rax+0000010C],#49
+jg originalcode // avoid rollback of mob kill counter
+cmp [_lessThan50Flag],1
+jne originalcode // avoid accidental early unlock
+mov [rax+0000010C],#49
+
+originalcode:
+inc [rax+0000010C]
+
+exit:
+jmp returnhere
+
+killTracker:
+dq 0
+
+_lessThan50Flag:
+dq 0
+
+"Dungeons.exe"+DD1BFE:
+jmp newmem
+nop
+returnhere:
+
+[DISABLE]
+LuaCall(cycleFullCompact(nil,false))
+
+unregistersymbol(killTracker)
+unregistersymbol(_lessThan50Flag)
+dealloc(newmem)
+"Dungeons.exe"+DD1BFE:
+inc [rax+0000010C]
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>20</ID>
+          <Description>"Achievements"</Description>
+          <Options moHideChildren="1"/>
+          <Color>008000</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+_lessThan50Flag:
+dq 01
+
+[DISABLE]
+_lessThan50Flag:
+dq 0
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>98</ID>
+              <Description>"A Friend in Need"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 18
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>27</ID>
+              <Description>"Apprentice Adventurer"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 07
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>101</ID>
+              <Description>"Blast Radius"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 15
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>29</ID>
+              <Description>"Break the Spell"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 05
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>90</ID>
+              <Description>"Built On Sand, Set in Stone"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 11
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>32</ID>
+              <Description>"Cha-ching!"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 0B
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>31</ID>
+              <Description>"Diamond Sword"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 03
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>26</ID>
+              <Description>"Expert Explorer"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 08
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>25</ID>
+              <Description>"Fancy That!"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 09
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>88</ID>
+              <Description>"Happy Camper"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 0E
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>104</ID>
+              <Description>"High and Dry"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 12
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>102</ID>
+              <Description>"High Treason"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 14
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>8</ID>
+              <Description>"Life of the Party"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 01
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>100</ID>
+              <Description>"Maxed Out and Geared Up"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 16
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>24</ID>
+              <Description>"More For Me"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 0A
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>89</ID>
+              <Description>"Om Nom Nom"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 0D
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>33</ID>
+              <Description>"Oooh! Shiny!"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 0C
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>87</ID>
+              <Description>"Out of the Woods"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 0F
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>30</ID>
+              <Description>"Passive Aggressive"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 04
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>103</ID>
+              <Description>"Saved the Overworld"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 13
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>28</ID>
+              <Description>"Scrappy Scout"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 06
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>86</ID>
+              <Description>"The Plot Thickens"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 10
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>23</ID>
+              <Description>"Wooden Sword"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>99</ID>
+              <Description>"Worked like a Charm"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 17
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>112</ID>
+              <Description>"Ancient Hunts (free Title Update)"</Description>
+              <Color>808000</Color>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>130</ID>
+                  <Description>"A Piglin's Best Friend"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 30
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>131</ID>
+                  <Description>"Ancient Hunter"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 2F
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>137</ID>
+                  <Description>"Back to Back"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 34
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>136</ID>
+                  <Description>"Homecoming"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 35
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>135</ID>
+                  <Description>"Locally Sourced"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 31
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>140</ID>
+                  <Description>"Seriously Overpowered"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 36
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>222</ID>
+              <Description>"Jungle Awakens DLC"</Description>
+              <Color>808000</Color>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>221</ID>
+                  <Description>"Abomination Domination"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 19
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>223</ID>
+                  <Description>"Pandamonium"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 1A
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>226</ID>
+                  <Description>"Leader of the Pack"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 1B
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>225</ID>
+                  <Description>"Survival Skills"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 1C
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>224</ID>
+                  <Description>"Jungle Fungus"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 1D
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>220</ID>
+              <Description>"Creeping Winter DLC"</Description>
+              <Color>808000</Color>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>217</ID>
+                  <Description>"Lone Champion"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 1E
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>218</ID>
+                  <Description>"Lost in the Snow"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 1F
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>219</ID>
+                  <Description>"Frozen Fists"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 22
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>108</ID>
+              <Description>"Creeping Winter (free Title Update)"</Description>
+              <Color>808000</Color>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>116</ID>
+                  <Description>"Chill Out"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 20
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>126</ID>
+                  <Description>"Smooth Operator"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 21
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>228</ID>
+              <Description>"Howling Peaks DLC"</Description>
+              <Color>808000</Color>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>227</ID>
+                  <Description>"Taming the Storm"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 23
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>233</ID>
+                  <Description>"Rampart Rampage"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 24
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>232</ID>
+                  <Description>"Whirlwind Warrior"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 25
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>231</ID>
+                  <Description>"A Taste of Their Own Medicine"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 26
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>230</ID>
+                  <Description>"Woolly Wisdom"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 27
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>229</ID>
+                  <Description>"Giant Slayer"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 28
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>114</ID>
+              <Description>"Howling Peaks (free Title Update)"</Description>
+              <Color>808000</Color>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>128</ID>
+                  <Description>"Dress for Success"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 2B
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>259</ID>
+                  <Description>"Herd Mentality"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 29
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>186</ID>
+                  <Description>"Post Post-Apocalypse"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 2A
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>185</ID>
+                  <Description>"Repeat Customer"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 2C
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>244</ID>
+              <Description>"Flames of the Nether DLC"</Description>
+              <Color>808000</Color>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>243</ID>
+                  <Description>"Nether Been Better"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 2D
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>246</ID>
+                  <Description>"Trial by Fire"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 2E
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>245</ID>
+                  <Description>"Acclaimed Acrobat"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 33
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>113</ID>
+              <Description>"Flames of the Nether (free Title Update)"</Description>
+              <Color>808000</Color>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>139</ID>
+                  <Description>"Ear Protection Recommended"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 32
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>235</ID>
+              <Description>"Hidden Depths DLC"</Description>
+              <Color>808000</Color>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>234</ID>
+                  <Description>"Turn the Tide"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 37
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>242</ID>
+                  <Description>"Glow and Behold"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 38
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>241</ID>
+                  <Description>"Iceologer's Revenge"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 39
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>240</ID>
+                  <Description>"Gone Fishin'"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 3A
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>239</ID>
+                  <Description>"Lost Power"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 3B
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>238</ID>
+                  <Description>"Save Your Breath"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 3D
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>237</ID>
+                  <Description>"Seafood Skewer"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 3E
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>236</ID>
+                  <Description>"Bubble Trouble"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 40
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>110</ID>
+              <Description>"Hidden Depths (free Title Update)"</Description>
+              <Color>808000</Color>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>149</ID>
+                  <Description>"Feeling Bubbly"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 3C
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>146</ID>
+                  <Description>"Bad Omen, Good Loot"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 3F
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>248</ID>
+              <Description>"Echoing Void DLC"</Description>
+              <Color>808000</Color>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>247</ID>
+                  <Description>"To the End!"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 41
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>256</ID>
+                  <Description>"Treasure Trove"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 42
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>255</ID>
+                  <Description>"Heartbreaker"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 43
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>254</ID>
+                  <Description>"I Need Them All"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 44
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>253</ID>
+                  <Description>"Take the High Road"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 45
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>252</ID>
+                  <Description>"End Run"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 46
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>251</ID>
+                  <Description>"Avoidable"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 47
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>250</ID>
+                  <Description>"Diver's Dozen"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 48
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>249</ID>
+                  <Description>"Burning Up"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 49
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>258</ID>
+              <Description>"Echoing Void (free Title Update)"</Description>
+              <Color>808000</Color>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>257</ID>
+                  <Description>"The Eponymous Squid"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 4A
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>152</ID>
+              <Description>"Cloudy Climb (free Title Update)"</Description>
+              <Color>808000</Color>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>162</ID>
+                  <Description>"Fashionable Climber"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 4B
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>168</ID>
+                  <Description>"Golden Gauntlet"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 52
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>172</ID>
+                  <Description>"Indomitable"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 4E
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>165</ID>
+                  <Description>"Meet and Greet"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 4C
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>166</ID>
+                  <Description>"Pet the Dog"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 54
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>167</ID>
+                  <Description>"So Many Stairs!"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 53
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>171</ID>
+                  <Description>"Staff Only (secret)"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 4F
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>173</ID>
+                  <Description>"Tower Power"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 4D
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>169</ID>
+                  <Description>"Trendsetter"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 51
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>170</ID>
+                  <Description>"Well-Seasoned"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 50
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>174</ID>
+              <Description>"Luminous Night (free Title Update)"</Description>
+              <Color>808000</Color>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>176</ID>
+                  <Description>"Back From Whence You Came!"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 5E
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>178</ID>
+                  <Description>"Creeper In The Woods"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 5C
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>180</ID>
+                  <Description>"Daily Destroyer"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 5A
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>181</ID>
+                  <Description>"Goal-Driven"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 59
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>179</ID>
+                  <Description>"Hot-Footed Hero"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 5B
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>177</ID>
+                  <Description>"How Does It All Fit?"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 5D
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>184</ID>
+                  <Description>"Mine Is Cuter Than Yours!"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 56
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>183</ID>
+                  <Description>"Same To You, Buddy!"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 57
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>175</ID>
+                  <Description>"So Last Season"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 55
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>182</ID>
+                  <Description>"Tower Tourist"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 58
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>187</ID>
+              <Description>"Fauna Faire (free Title Update)"</Description>
+              <Color>808000</Color>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>209</ID>
+                  <Description>"A, B, Bee, Bee, Bee, Bee, Bee"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 68
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>214</ID>
+                  <Description>"Adorable Explorer"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 63
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>212</ID>
+                  <Description>"Alpha Centurion"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 65
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>208</ID>
+                  <Description>"Customised Customer"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 60
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>188</ID>
+                  <Description>"Desert Dynamo"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 5F
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>213</ID>
+                  <Description>"Same To You, Mate 2.0"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 64
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>211</ID>
+                  <Description>"Soul Powered"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 66
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>210</ID>
+                  <Description>"Thanks But No Thanks!"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 67
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>216</ID>
+                  <Description>"Treetop Trespasser"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 61
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>215</ID>
+                  <Description>"Treetop Untangled"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 62
+
+[DISABLE]
+"Dungeons.exe"+DD1CAE+1:
+db 02
+</AssemblerScript>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>16</ID>
+      <Description>"DEBUG"</Description>
+      <Options moHideChildren="1"/>
+      <Color>0000FA</Color>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>18</ID>
+          <Description>"Queued ID"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>"Dungeons.exe"+DD1CAE+1</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>21</ID>
+          <Description>"_lessThan50Flag"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>_lessThan50Flag</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>15</ID>
+          <Description>"[killTracker]"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>[killTracker]+10C</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
